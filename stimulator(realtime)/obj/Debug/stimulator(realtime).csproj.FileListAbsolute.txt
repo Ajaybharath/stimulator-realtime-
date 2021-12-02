@@ -1,0 +1,12 @@
+E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\bin\Debug\stimulator(realtime).exe.config
+E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\bin\Debug\stimulator(realtime).exe
+E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\bin\Debug\stimulator(realtime).pdb
+E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\obj\Debug\stimulator(realtime).csproj.AssemblyReference.cache
+E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\obj\Debug\stimulator_realtime_.Form1.resources
+E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\obj\Debug\stimulator_realtime_.Properties.Resources.resources
+E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\obj\Debug\stimulator(realtime).csproj.GenerateResource.cache
+E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\obj\Debug\stimulator(realtime).csproj.CoreCompileInputs.cache
+E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\obj\Debug\stimulator(realtime).exe
+E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\obj\Debug\stimulator(realtime).pdb
+E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\bin\Debug\Newtonsoft.Json.dll
+E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\obj\Debug\stimulator(realtime).csproj.CopyComplete
