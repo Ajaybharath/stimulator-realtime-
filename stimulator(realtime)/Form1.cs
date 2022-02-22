@@ -24,13 +24,15 @@ namespace stimulator_realtime_
         }
         bool check = false;
         string deviceid = "DX_CSC6548";
+        //var Timestamp;
+        string Timestamp;
         int devStat, defroStat, compStat, evapStat, auxStat;
         double minTemp, maxTemp, minsetPoint, maxsetPoint, round, rn, roomTemp, setPoint, evapTemp, minevapTemp, maxevapTemp;
  
         public void inputs()
         {
             //simulator
-                var Timestamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds();
+                Timestamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString();
                 DateTime dateTime = DateTime.Now;
                 lbldeviceid.Text = deviceid;
                 lblRecievedTime.Text = Timestamp.ToString();
@@ -67,7 +69,7 @@ namespace stimulator_realtime_
                 sensorvalueARR.Add(lblevpStat.Text);
                 sensorvalueARR.Add(lblauxStat.Text);
             //raw data
-                SqlConnection cn = new SqlConnection("uid=sa;pwd=Ide@123;database=AB;server=AJAYBHARATH\\SQLEXPRESS");
+                SqlConnection cn = new SqlConnection("uid=sa;pwd=Ide@123;database=AB;server=DESKTOP-FMJB5MP");
                 cn.Open();
                 SqlCommand cm = new SqlCommand("proc_devicedata", cn);//timing,deviceid,temperature
                 cm.CommandType = CommandType.StoredProcedure;
@@ -209,6 +211,13 @@ namespace stimulator_realtime_
             timer1.Enabled = false;
             inputs();
             timer1.Enabled = true;
+            Timestamp = "1645617600";
+            string houroftheDay = new DateTime(1970, 1, 1).AddSeconds(Convert.ToDouble(Timestamp)).TimeOfDay.ToString();//hour of the day
+            string dateoftheDay = new DateTime(1970, 1, 1).AddSeconds(Convert.ToDouble(Timestamp)).Day.ToString();
+            if (houroftheDay == "12:00:00")
+            {
+                deviceid = "DX_CSC6548" +"_"+Timestamp;
+            }
         }
         private void btnsubmit_Click(object sender, EventArgs e)
         {

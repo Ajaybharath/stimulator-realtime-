@@ -10,3 +10,16 @@ E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\obj\Debug\stimulator(rea
 E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\obj\Debug\stimulator(realtime).pdb
 E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\bin\Debug\Newtonsoft.Json.dll
 E:\ASSINGMENT\stimulator(realtime)\stimulator(realtime)\obj\Debug\stimulator(realtime).csproj.CopyComplete
+D:\Project\stimulator-realtime-\stimulator(realtime)\bin\Debug\stimulator(realtime).exe.config
+D:\Project\stimulator-realtime-\stimulator(realtime)\bin\Debug\stimulator(realtime).exe
+D:\Project\stimulator-realtime-\stimulator(realtime)\bin\Debug\stimulator(realtime).pdb
+D:\Project\stimulator-realtime-\stimulator(realtime)\bin\Debug\Newtonsoft.Json.dll
+D:\Project\stimulator-realtime-\stimulator(realtime)\obj\Debug\stimulator(realtime).csproj.AssemblyReference.cache
+D:\Project\stimulator-realtime-\stimulator(realtime)\obj\Debug\stimulator_realtime_.Form1.resources
+D:\Project\stimulator-realtime-\stimulator(realtime)\obj\Debug\stimulator_realtime_.Form2.resources
+D:\Project\stimulator-realtime-\stimulator(realtime)\obj\Debug\stimulator_realtime_.Properties.Resources.resources
+D:\Project\stimulator-realtime-\stimulator(realtime)\obj\Debug\stimulator(realtime).csproj.GenerateResource.cache
+D:\Project\stimulator-realtime-\stimulator(realtime)\obj\Debug\stimulator(realtime).csproj.CoreCompileInputs.cache
+D:\Project\stimulator-realtime-\stimulator(realtime)\obj\Debug\stimulator(realtime).csproj.CopyComplete
+D:\Project\stimulator-realtime-\stimulator(realtime)\obj\Debug\stimulator(realtime).exe
+D:\Project\stimulator-realtime-\stimulator(realtime)\obj\Debug\stimulator(realtime).pdb
