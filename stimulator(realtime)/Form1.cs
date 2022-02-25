@@ -28,138 +28,139 @@ namespace stimulator_realtime_
         string Timestamp;
         int devStat, defroStat, compStat, evapStat, auxStat;
         double minTemp, maxTemp, minsetPoint, maxsetPoint, round, rn, roomTemp, setPoint, evapTemp, minevapTemp, maxevapTemp;
- 
+
         public void inputs()
         {
             //simulator
-                Timestamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString();
-                DateTime dateTime = DateTime.Now;
-                lbldeviceid.Text = deviceid;
-                lblRecievedTime.Text = Timestamp.ToString();
-                Random rand = new Random();
-                minTemp = 10;
-                maxTemp = 40;
-                roomTemp = Math.Round((rand.NextDouble() * (maxTemp - minTemp)) + minTemp, 1);
-                lblRoomTemp.Text = roomTemp.ToString();
-                minsetPoint = -10;
-                maxsetPoint = 10;
-                setPoint = Math.Round((rand.NextDouble() * (maxsetPoint - minsetPoint)) + minsetPoint, 1);
-                lblSetPoint.Text = setPoint.ToString();
-                minevapTemp = 60;
-                maxevapTemp = 80;
-                evapTemp = Math.Round((rand.NextDouble() * (maxevapTemp - minevapTemp)) + minevapTemp, 1);
-                lblevapTemp.Text = evapTemp.ToString();
-                int result = new Random().Next(0, 2);
-                lblDevstat.Text = result.ToString();
-                lbldefroStat.Text = new Random().Next(0, 2).ToString();
-                lblauxStat.Text = new Random().Next(0, 2).ToString();
-                lblcompStat.Text = new Random().Next(0, 2).ToString();
-                lblevpStat.Text = new Random().Next(0, 2).ToString();
-                string shortcode = deviceid.Split('_')[0].ToString() + "_";
-               //sensors
-                string[] sensoridARR = {"tms","roomTemp","setPoint","devStat","evapTemp","defroStat","compStat","evapStat","auxStat"};
-                List<string> sensorvalueARR = new List<string>();
-                sensorvalueARR.Add(Timestamp.ToString());
-                sensorvalueARR.Add(roomTemp.ToString());
-                sensorvalueARR.Add(setPoint.ToString());
-                sensorvalueARR.Add(result.ToString());
-                sensorvalueARR.Add(evapTemp.ToString());
-                sensorvalueARR.Add(lbldefroStat.Text);
-                sensorvalueARR.Add(lblcompStat.Text);
-                sensorvalueARR.Add(lblevpStat.Text);
-                sensorvalueARR.Add(lblauxStat.Text);
+            Timestamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString();
+            DateTime dateTime = DateTime.Now;
+            lbldeviceid.Text = deviceid;
+            lblRecievedTime.Text = Timestamp.ToString();
+            Random rand = new Random();
+            minTemp = 10;
+            maxTemp = 40;
+            roomTemp = Math.Round((rand.NextDouble() * (maxTemp - minTemp)) + minTemp, 1);
+            lblRoomTemp.Text = roomTemp.ToString();
+            minsetPoint = -10;
+            maxsetPoint = 10;
+            setPoint = Math.Round((rand.NextDouble() * (maxsetPoint - minsetPoint)) + minsetPoint, 1);
+            lblSetPoint.Text = setPoint.ToString();
+            minevapTemp = 60;
+            maxevapTemp = 80;
+            evapTemp = Math.Round((rand.NextDouble() * (maxevapTemp - minevapTemp)) + minevapTemp, 1);
+            lblevapTemp.Text = evapTemp.ToString();
+            int result = new Random().Next(0, 2);
+            lblDevstat.Text = result.ToString();
+            lbldefroStat.Text = new Random().Next(0, 2).ToString();
+            lblauxStat.Text = new Random().Next(0, 2).ToString();
+            lblcompStat.Text = new Random().Next(0, 2).ToString();
+            lblevpStat.Text = new Random().Next(0, 2).ToString();
+            string shortcode = deviceid.Split('_')[0].ToString() + "_";
+            //sensors
+            string[] sensoridARR = { "tms", "roomTemp", "setPoint", "devStat", "evapTemp", "defroStat", "compStat", "evapStat", "auxStat" };
+            List<string> sensorvalueARR = new List<string>();
+            sensorvalueARR.Add(Timestamp.ToString());
+            sensorvalueARR.Add(roomTemp.ToString());
+            sensorvalueARR.Add(setPoint.ToString());
+            sensorvalueARR.Add(result.ToString());
+            sensorvalueARR.Add(evapTemp.ToString());
+            sensorvalueARR.Add(lbldefroStat.Text);
+            sensorvalueARR.Add(lblcompStat.Text);
+            sensorvalueARR.Add(lblevpStat.Text);
+            sensorvalueARR.Add(lblauxStat.Text);
             //raw data
-                SqlConnection cn = new SqlConnection("uid=sa;pwd=Ide@123;database=AB;server=DESKTOP-FMJB5MP");
-                cn.Open();
-                SqlCommand cm = new SqlCommand("proc_devicedata", cn);//timing,deviceid,temperature
-                cm.CommandType = CommandType.StoredProcedure;
-                SqlParameter receivedtime, devicedata;
-                devicedata d = new devicedata();
-                //List<devicedata> devicelst = new List<devicedata>();
-                d.deviceId = deviceid;
-                d.tms = Timestamp.ToString();
-                d.roomTemp = roomTemp.ToString();
-                d.setPoint = setPoint.ToString();
-                d.devStat = lblDevstat.Text;
-                d.evapTemp = evapTemp.ToString();
-                d.defroStat = lbldefroStat.Text;
-                d.compStat = lblcompStat.Text;
-                d.evapStat = lblevpStat.Text;
-                d.auxStat = lblauxStat.Text;
-                //devicelst.Add(d);
-                string jsondata = JsonConvert.SerializeObject(d);
-                devicedata = new SqlParameter("devicedata", SqlDbType.VarChar);
-                devicedata.Value = jsondata;
-                cm.Parameters.Add(devicedata);
-                receivedtime = new SqlParameter("receivedtime", SqlDbType.VarChar);
-                receivedtime.Value = DateTime.Now;
-                cm.Parameters.Add(receivedtime);
-                cm.ExecuteNonQuery();
-                cn.Close();
-                cn.Open();
+            SqlConnection cn = new SqlConnection("uid=sa;pwd=Ide@123;database=AB;server=DESKTOP-FMJB5MP");
+            cn.Open();
+            SqlCommand cm = new SqlCommand("proc_devicedata", cn);//timing,deviceid,temperature
+            cm.CommandType = CommandType.StoredProcedure;
+            SqlParameter receivedtime, devicedata;
+            devicedata d = new devicedata();
+            //List<devicedata> devicelst = new List<devicedata>();
+            d.deviceId = deviceid;
+            d.tms = Timestamp.ToString();
+            d.roomTemp = roomTemp.ToString();
+            d.setPoint = setPoint.ToString();
+            d.devStat = lblDevstat.Text;
+            d.evapTemp = evapTemp.ToString();
+            d.defroStat = lbldefroStat.Text;
+            d.compStat = lblcompStat.Text;
+            d.evapStat = lblevpStat.Text;
+            d.auxStat = lblauxStat.Text;
+            //devicelst.Add(d);
+            string jsondata = JsonConvert.SerializeObject(d);
+            devicedata = new SqlParameter("devicedata", SqlDbType.VarChar);
+            devicedata.Value = jsondata;
+            cm.Parameters.Add(devicedata);
+            receivedtime = new SqlParameter("receivedtime", SqlDbType.VarChar);
+            receivedtime.Value = DateTime.Now;
+            cm.Parameters.Add(receivedtime);
+            cm.ExecuteNonQuery();
+            cn.Close();
+            cn.Open();
             //live data
-                for (int i = 0; i < sensoridARR.Count(); i++)
-                {
-                    SqlCommand cm1 = new SqlCommand("proc_devicelivedata", cn);
-                    cm1.CommandType = CommandType.StoredProcedure;
-                    SqlParameter DeviceId1, SensorId, SensorValue, ReceivedTime, ShortCode, SensorTime, ShowLive, IfTrue, IfFalse, Dif_In_Mins, SENSORTYPE, uom, inserted;
-                    DeviceId1 = new SqlParameter("DeviceId", SqlDbType.VarChar);
-                    DeviceId1.Value = deviceid;
-                    cm1.Parameters.Add(DeviceId1);
-                    SensorId = new SqlParameter("SensorId", SqlDbType.VarChar);
-                    SensorId.Value = sensoridARR[i].ToString();
-                    cm1.Parameters.Add(SensorId);
-                    SensorValue = new SqlParameter("SensorValue",SqlDbType.VarChar);
-                    SensorValue.Value = sensorvalueARR[i].ToString();
-                    cm1.Parameters.Add(SensorValue);
-                    ReceivedTime = new SqlParameter("ReceivedTime",SqlDbType.DateTime);
-                    ReceivedTime.Value = dateTime;
-                    cm1.Parameters.Add(ReceivedTime);
-                    ShortCode = new SqlParameter("ShortCode",SqlDbType.VarChar);
-                    ShortCode.Value = shortcode;
-                    cm1.Parameters.Add(ShortCode);
-                    SensorTime = new SqlParameter("SensorTime",SqlDbType.VarChar);
-                    SensorTime.Value = Timestamp.ToString();
-                    cm1.Parameters.Add(SensorTime);
-                    ShowLive = new SqlParameter("ShowLive", SqlDbType.VarChar);
-                    ShowLive.Value = "null";
-                    cm1.Parameters.Add(ShowLive);
-                    IfTrue = new SqlParameter("IfTrue", SqlDbType.VarChar);
-                    IfTrue.Value = "null";
-                    cm1.Parameters.Add(IfTrue);
-                    IfFalse = new SqlParameter("IfFalse", SqlDbType.VarChar);
-                    IfFalse.Value = "null";
-                    cm1.Parameters.Add(IfFalse);
-                    Dif_In_Mins = new SqlParameter("Dif_In_Mins", SqlDbType.VarChar);
-                    Dif_In_Mins.Value = "null";
-                    cm1.Parameters.Add(Dif_In_Mins);
-                    SENSORTYPE = new SqlParameter("SENSORTYPE", SqlDbType.VarChar);
-                    SENSORTYPE.Value = "null";
-                    cm1.Parameters.Add(SENSORTYPE);
-                    uom = new SqlParameter("uom", SqlDbType.VarChar);
-                    uom.Value = "null";
-                    cm1.Parameters.Add(uom);
-                    inserted = new SqlParameter("inserted", SqlDbType.VarChar);
-                    inserted.Value = "null";
-                    cm1.Parameters.Add(inserted);
-                    cm1.ExecuteNonQuery();
-                }
+            for (int i = 0; i < sensoridARR.Count(); i++)
+            {
+                SqlCommand cm1 = new SqlCommand("proc_devicelivedata", cn);
+                cm1.CommandType = CommandType.StoredProcedure;
+                SqlParameter DeviceId1, SensorId, SensorValue, ReceivedTime, ShortCode, SensorTime, ShowLive, IfTrue, IfFalse, Dif_In_Mins, SENSORTYPE, uom, inserted;
+                DeviceId1 = new SqlParameter("DeviceId", SqlDbType.VarChar);
+                DeviceId1.Value = deviceid;
+                cm1.Parameters.Add(DeviceId1);
+                SensorId = new SqlParameter("SensorId", SqlDbType.VarChar);
+                SensorId.Value = sensoridARR[i].ToString();
+                cm1.Parameters.Add(SensorId);
+                SensorValue = new SqlParameter("SensorValue", SqlDbType.VarChar);
+                SensorValue.Value = sensorvalueARR[i].ToString();
+                cm1.Parameters.Add(SensorValue);
+                ReceivedTime = new SqlParameter("ReceivedTime", SqlDbType.DateTime);
+                ReceivedTime.Value = dateTime;
+                cm1.Parameters.Add(ReceivedTime);
+                ShortCode = new SqlParameter("ShortCode", SqlDbType.VarChar);
+                ShortCode.Value = shortcode;
+                cm1.Parameters.Add(ShortCode);
+                SensorTime = new SqlParameter("SensorTime", SqlDbType.VarChar);
+                SensorTime.Value = Timestamp.ToString();
+                cm1.Parameters.Add(SensorTime);
+                ShowLive = new SqlParameter("ShowLive", SqlDbType.VarChar);
+                ShowLive.Value = "null";
+                cm1.Parameters.Add(ShowLive);
+                IfTrue = new SqlParameter("IfTrue", SqlDbType.VarChar);
+                IfTrue.Value = "null";
+                cm1.Parameters.Add(IfTrue);
+                IfFalse = new SqlParameter("IfFalse", SqlDbType.VarChar);
+                IfFalse.Value = "null";
+                cm1.Parameters.Add(IfFalse);
+                Dif_In_Mins = new SqlParameter("Dif_In_Mins", SqlDbType.VarChar);
+                Dif_In_Mins.Value = "null";
+                cm1.Parameters.Add(Dif_In_Mins);
+                SENSORTYPE = new SqlParameter("SENSORTYPE", SqlDbType.VarChar);
+                SENSORTYPE.Value = "null";
+                cm1.Parameters.Add(SENSORTYPE);
+                uom = new SqlParameter("uom", SqlDbType.VarChar);
+                uom.Value = "null";
+                cm1.Parameters.Add(uom);
+                inserted = new SqlParameter("inserted", SqlDbType.VarChar);
+                inserted.Value = "null";
+                cm1.Parameters.Add(inserted);
+                cm1.ExecuteNonQuery();
+            }
             cn.Close();
             //hisData
             cn.Open();
-            SqlCommand cm2 = new SqlCommand("select distinct deviceid from tbl_devicedata",cn);
+            SqlCommand cm2 = new SqlCommand("select distinct deviceid from tbl_devicedata", cn);
             SqlDataReader dr = cm2.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(dr);
             cn.Close();
             cn.Open();
+
             for (int j = 0; j < dt.Rows.Count; j++)
             {
                 for (int i = 0; i < sensoridARR.Count(); i++)
                 {
                     SqlCommand cm3 = new SqlCommand("proc_hisTable", cn);
                     cm3.CommandType = CommandType.StoredProcedure;
-                    SqlParameter hisDeviceId, hisSensorId, hisSensorValue, hisReceivedTime, hisShortCode, hisSensorTime, hisShowLive, hisIfTrue, hisIfFalse, hisDif_In_Mins, hisSENSORTYPE, hisuom, hisinserted,histablename;
+                    SqlParameter hisDeviceId, hisSensorId, hisSensorValue, hisReceivedTime, hisShortCode, hisSensorTime, hisShowLive, hisIfTrue, hisIfFalse, hisDif_In_Mins, hisSENSORTYPE, hisuom, hisinserted, histablename, histablename1;
                     hisDeviceId = new SqlParameter("DeviceId", SqlDbType.VarChar);
                     hisDeviceId.Value = deviceid;
                     cm3.Parameters.Add(hisDeviceId);
@@ -199,25 +200,53 @@ namespace stimulator_realtime_
                     hisinserted = new SqlParameter("inserted", SqlDbType.VarChar);
                     hisinserted.Value = "null";
                     cm3.Parameters.Add(hisinserted);
-                    histablename = new SqlParameter("tablename",SqlDbType.VarChar);
+                    histablename = new SqlParameter("tablename", SqlDbType.VarChar);
                     histablename.Value = dt.Rows[j]["deviceid"].ToString();
                     cm3.Parameters.Add(histablename);
+                    histablename1 = new SqlParameter("tablename1", SqlDbType.VarChar);
+                    string Date = new DateTime(1970, 1, 1).AddSeconds(Convert.ToDouble(Timestamp)).ToShortDateString();
+                    //string Time = new DateTime(1970, 1, 1).AddSeconds(Convert.ToDouble(Timestamp)).ToShortTimeString();
+                    //string houroftheDay = new DateTime(1970, 1, 1).AddSeconds(Convert.ToDouble(Timestamp)).TimeOfDay.ToString();//hour of the day
+                    //string dateoftheDay = new DateTime(1970, 1, 1).AddSeconds(Convert.ToDouble(Timestamp)).Day.ToString();
+                    //deviceid = "DX_CSC6548" + "_" + Timestamp;
+                    //string DateTime = Date.ToString() + " " + "00:00:00";
+                    string DateTime = Date.ToString();
+                    DateTime EpochTime = Convert.ToDateTime(DateTime);
+                    //DateTime oDate = DateTime.Parse(DateTime);
+                    TimeSpan t = EpochTime - new DateTime(1970, 1, 1);
+                    int secondsSinceEpoch = (int)t.TotalSeconds;
+                    Timestamp = secondsSinceEpoch.ToString();
+                    //deviceid = "DX_CSC6548" + "_" + Timestamp; ;
+                    histablename1.Value = dt.Rows[j]["deviceid"].ToString() + "_" + Timestamp;
+                    cm3.Parameters.Add(histablename1);
                     cm3.ExecuteNonQuery();
-                } 
+                }
             }
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //string Date = new DateTime(1970, 1, 1).AddSeconds(Convert.ToDouble(Timestamp)).ToShortDateString();
+            //string Time = new DateTime(1970, 1, 1).AddSeconds(Convert.ToDouble(Timestamp)).ToShortTimeString();
+            ////string houroftheDay = new DateTime(1970, 1, 1).AddSeconds(Convert.ToDouble(Timestamp)).TimeOfDay.ToString();//hour of the day
+            //string dateoftheDay = new DateTime(1970, 1, 1).AddSeconds(Convert.ToDouble(Timestamp)).Day.ToString();
+            //if (Time == "12:00")
+            //{
+            //    deviceid = "DX_CSC6548" + "_" + Timestamp;
+            //}
+            //else if (Time != "12:00")
+            //{
+            //    string DateTime = Date.ToString() + " " + "12:00:00";
+            //    DateTime EpochTime = Convert.ToDateTime(DateTime);
+            //    //DateTime oDate = DateTime.Parse(DateTime);
+            //    TimeSpan t = EpochTime - new DateTime(1970, 1, 1);
+            //    int secondsSinceEpoch = (int)t.TotalSeconds;
+            //    deviceid = "DX_CSC6548" + "_" + Timestamp; ;
+            //}
             timer1.Enabled = false;
             inputs();
             timer1.Enabled = true;
-            Timestamp = "1645617600";
-            string houroftheDay = new DateTime(1970, 1, 1).AddSeconds(Convert.ToDouble(Timestamp)).TimeOfDay.ToString();//hour of the day
-            string dateoftheDay = new DateTime(1970, 1, 1).AddSeconds(Convert.ToDouble(Timestamp)).Day.ToString();
-            if (houroftheDay == "12:00:00")
-            {
-                deviceid = "DX_CSC6548" +"_"+Timestamp;
-            }
+            //Timestamp = "1645617600";
+            //Timestamp = "1645626880";
         }
         private void btnsubmit_Click(object sender, EventArgs e)
         {
